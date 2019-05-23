@@ -35,29 +35,21 @@ Array_train = np.array(X_train)
 Array_test = np.array(X_test)
 
 #Calculando a media dos arrays
-Media_train = np.average(Array_train)
-Max_train = np.max(Array_train)
-Min_train = np.min(Array_train)
+
+Max_LSTAT = np.max(Array_train[0])
+Min_LSTAT = np.min(Array_train[0])
+Max_RM = np.max(Array_train[1])
+Min_RM = np.min(Array_train[1])
 
 #Subtraindo a media dos dados
-Array_train = (Array_train - Min_train) / (Max_train - Min_train)
-Array_test  = (Array_test - Min_train) / (Max_train - Min_train)
+Array_train[0] = (Array_train[0] - Min_LSTAT) / (Max_LSTAT - Min_LSTAT)
+Array_train[1] = (Array_train[1] - Min_RM) / (Max_RM - Min_RM)
+Array_test[0]  = (Array_test[0] - Min_LSTAT) / (Max_LSTAT - Min_LSTAT)
+Array_test [1] = (Array_test[1] - Min_RM) / (Max_RM - Min_RM)
 #Voltando para DataFrame
 Array_train = pd.DataFrame(Array_train)
 Array_test = pd.DataFrame(Array_test)
 
-
-
-
-
-#Fazendo a potencia e a somatoria
-#Norm_train = np.vdot(Norm_train,Norm_train)
-#Array_train = Array_train/Max_train
-#Array_test  = Array_test/Max_train
-
-#print("*************RESULTADO************")
-#print(Array_train)
-#print("**********************************")
 
 
 # Visualizando os dados
@@ -141,7 +133,7 @@ while(1):
 
     #   Adiciona os valores normalizados com os dados do treino a uma lista
     S1 = []
-    S1.append([(float(X1) - Min_train)/(Max_train - Min_train), (float(X2) - Min_train)/(Max_train - Min_train)])
+    S1.append([(float(X1) - Min_RM)/(Max_LSTAT - Min_LSTAT), (float(X2) - Min_RM)/(Max_RM - Min_RM)])
 
     #   Converte para DataFrame e envia para a predição
     entrada = pd.DataFrame(S1, columns = ['LSTAT','RM'])
